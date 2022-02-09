@@ -1,11 +1,12 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core'; // NestFactory 暴露了一些静态方法用于创建应用实例
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ValidationPipe } from './common/pipes/validation.pipe';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module'; // 入口（根）应用模块类（class），用作 创建应用实例 的参数
 
 async function bootstrap() {
+  // 创建 NestApplication(Nest应用) 实例: INestApplication
   const app = await NestFactory.create(AppModule);
 
   // 全局使用中间件
@@ -30,6 +31,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup('doc', app, document);
 
+  // 启动应用
   await app.listen(3000);
 }
 bootstrap();
